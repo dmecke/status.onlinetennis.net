@@ -1,0 +1,38 @@
+{% extends 'CoreBundle::layout.html.twig' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1 class="text-muted">Onlinetennis Status Page</h1>
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-primary lead">
+                    <div class="panel-heading">{{ classicTour.name }}</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+{% for service in classicTour.services %}
+                            <li class="list-group-item list-group-item-{{ service.status.type }}"><span class="glyphicon glyphicon-{{ service.status.glyphicon }}" style="top: 3px"></span><span style="margin-left: 10px">{{ service.name }}</span></li>
+{% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-primary lead">
+                    <div class="panel-heading">{{ speedTour.name }}</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+{% for service in speedTour.services %}
+                            <li class="list-group-item list-group-item-{{ service.status.type }}"><span class="glyphicon glyphicon-{{ service.status.glyphicon }}" style="top: 3px"></span><span style="margin-left: 10px">{{ service.name }}</span></li>
+{% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer"><p>Made with ♥ in Hamburg, Germany</p></footer>
+</div>
+{% endblock %}

@@ -1,0 +1,4 @@
+services:
+    api:
+        class: Cunningsoft\CoreBundle\Api\Api
+        arguments: [@buzz]
