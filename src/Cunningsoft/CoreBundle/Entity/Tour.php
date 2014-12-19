@@ -14,7 +14,7 @@ class Tour
     private $name;
 
     /**
-     * @var Service[]
+     * @var ArrayCollection|Service[]
      */
     private $services;
 
