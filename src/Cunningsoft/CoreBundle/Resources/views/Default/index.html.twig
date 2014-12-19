@@ -13,7 +13,7 @@
                     <div class="panel-body">
                         <ul class="list-group">
 {% for service in classicTour.services %}
-                            <li class="list-group-item list-group-item-{{ service.status.type }}"><span class="glyphicon glyphicon-{{ service.status.glyphicon }}" style="top: 3px"></span><span style="margin-left: 10px">{{ service.name }}</span></li>
+                            <li class="list-group-item list-group-item-{{ service.status.type }}"><span class="glyphicon glyphicon-{{ service.status.glyphicon }}" style="top: 3px"></span><span style="margin-left: 10px">{{ service.name }}</span>{% if service.hasAdditionalInfo %}<span class="badge" style="margin-top: 6px" title="{{ service.additionalInfo[1] }}">{{ service.additionalInfo[0] }}</span>{% endif %}</li>
 {% endfor %}
                         </ul>
                     </div>
@@ -25,7 +25,7 @@
                     <div class="panel-body">
                         <ul class="list-group">
 {% for service in speedTour.services %}
-                            <li class="list-group-item list-group-item-{{ service.status.type }}"><span class="glyphicon glyphicon-{{ service.status.glyphicon }}" style="top: 3px"></span><span style="margin-left: 10px">{{ service.name }}</span></li>
+                            <li class="list-group-item list-group-item-{{ service.status.type }}"><span class="glyphicon glyphicon-{{ service.status.glyphicon }}" style="top: 3px"></span><span style="margin-left: 10px">{{ service.name }}</span>{% if service.hasAdditionalInfo %}<span class="badge" style="margin-top: 6px" title="{{ service.additionalInfo[1] }}">{{ service.additionalInfo[0] }}</span>{% endif %}</li>
 {% endfor %}
                         </ul>
                     </div>

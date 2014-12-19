@@ -60,9 +60,12 @@ class Tour
     static public function createByApiResponse($name, \stdClass $response)
     {
         $tour = new Tour($name);
-        foreach ($response as $serviceName => $isUp) {
-            $status = new Status($isUp ? new Up() : new Down());
+        foreach ($response as $serviceName => $v) {
+            $status = new Status($v === false ? new Down() : new Up());
             $service = new Service($serviceName, $status);
+            if (is_array($v)) {
+                $service->setAdditionalInfo($v);
+            }
             $tour->addService($service);
         }
 
