@@ -2,3 +2,27 @@ services:
     api:
         class: Cunningsoft\CoreBundle\Api\Api
         arguments: [@buzz]
+
+    factory.service:
+        class: Cunningsoft\CoreBundle\Entity\Service\Factory
+        arguments: [@repository.service, @factory.status]
+
+    factory.status:
+        class: Cunningsoft\CoreBundle\Entity\Status\Factory
+        arguments: [@doctrine.orm.entity_manager]
+
+    factory.tour:
+        class: Cunningsoft\CoreBundle\Entity\Tour\Factory
+        arguments: [@repository.tour, @factory.service]
+
+    repository.service:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments: [Cunningsoft\CoreBundle\Entity\Service\Service]
+
+    repository.tour:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments: [Cunningsoft\CoreBundle\Entity\Tour\Tour]
