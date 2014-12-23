@@ -1,20 +1,36 @@
 <?php
 
-namespace Cunningsoft\CoreBundle\Entity;
+namespace Cunningsoft\CoreBundle\Entity\Tour;
 
-use Cunningsoft\CoreBundle\Entity\StatusType\Down;
-use Cunningsoft\CoreBundle\Entity\StatusType\Up;
+use Cunningsoft\CoreBundle\Entity\Service\Service;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity(repositoryClass="Repository")
+ */
 class Tour
 {
     /**
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
      * @var string
+     *
+     * @ORM\Column(type="string")
      */
     private $name;
 
     /**
      * @var ArrayCollection|Service[]
+     *
+     * @ORM\OneToMany(targetEntity="Cunningsoft\CoreBundle\Entity\Service\Service", mappedBy="tour")
      */
     private $services;
 
@@ -49,26 +65,5 @@ class Tour
     public function getServices()
     {
         return $this->services;
-    }
-
-    /**
-     * @param $name
-     * @param \stdClass $response
-     *
-     * @return Tour
-     */
-    static public function createByApiResponse($name, \stdClass $response)
-    {
-        $tour = new Tour($name);
-        foreach ($response as $serviceName => $v) {
-            $status = new Status($v === false ? new Down() : new Up());
-            $service = new Service($serviceName, $status);
-            if (is_array($v)) {
-                $service->setAdditionalInfo($v);
-            }
-            $tour->addService($service);
-        }
-
-        return $tour;
     }
 }

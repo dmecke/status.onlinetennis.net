@@ -3,6 +3,7 @@
 namespace Cunningsoft\CoreBundle\Api;
 
 use Buzz\Browser;
+use Buzz\Exception\RequestException;
 
 class Api
 {
@@ -23,8 +24,12 @@ class Api
      */
     public function status($host)
     {
-        $response = $this->browser->get($host . '/api/v1/status');
+        try {
+            $response = $this->browser->get($host . '/api/v1/status')->getContent();
+        } catch (RequestException $e) {
+            $response = json_encode(new \stdClass());
+        }
 
-        return json_decode($response->getContent());
+        return json_decode($response);
     }
 }
